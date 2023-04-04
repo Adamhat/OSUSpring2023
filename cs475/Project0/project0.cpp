@@ -8,7 +8,7 @@
 #endif
 
 #ifndef SIZE
-#define SIZE       	16384 	// array size -- you get to decide
+#define SIZE       	10000000 	// array size -- you get to decide
 #endif
 
 #define NUMTRIES        20	// how many times to run the timing to get reliable timing data
