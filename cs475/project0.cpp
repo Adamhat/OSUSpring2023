@@ -1,13 +1,14 @@
 #include <omp.h>
 #include <stdio.h>
 #include <math.h>
+#include <stdlib.h>
 
 #ifndef NUMT
 #define NUMT	         1	// number of threads to use -- do once for 1 and once for 4
 #endif
 
 #ifndef SIZE
-#define SIZE       	??	// array size -- you get to decide
+#define SIZE       	16384 	// array size -- you get to decide
 #endif
 
 #define NUMTRIES        20	// how many times to run the timing to get reliable timing data
