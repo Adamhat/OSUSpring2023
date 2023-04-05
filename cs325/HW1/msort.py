@@ -8,7 +8,7 @@ def mergesort(arr):
         
         i, j, k = 0, 0, 0
         while i < len(leftArray) and j < len(rightArray):
-            if leftArray[i] < rightArray[j]:
+            if leftArray[i] <= rightArray[j]:
                 arr[k] = leftArray[i]
                 i += 1
             else:
