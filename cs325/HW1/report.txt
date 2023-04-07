@@ -1,0 +1,31 @@
+0. What's the best-case, worst-case, and average-case time complexities of quicksort. 
+Briefly explain each case. No need to analyze the average-case.
+
+Best Case is nlogn which happens if the pivot is always in the center because you are always shrinking the array by half.
+Worst Case is n^2 which happens if you always have a pivot on the left/right most side
+
+
+1. Approximately how many hours did you spend on this assignment?
+
+I spent around 4 hours on this assignment. Around an hour for the first two questions and around 3 or more on the last question buggy qsort. 
+I had a lot of trouble figuring out how the recursion worked and implementing the functions.
+
+
+2. Would you rate it as easy, moderate, or difficult?
+
+Moderate as I do not have much python experiance but I am not a complete novice.
+
+
+3. Did you work on it mostly alone, or mostly with other people?
+
+Alone 
+
+
+4. How deeply do you feel you understand the material it covers (0%-100%)? 
+
+80%
+
+
+5. Any other comments?
+
+N/A
