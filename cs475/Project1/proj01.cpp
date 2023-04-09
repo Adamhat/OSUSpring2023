@@ -111,7 +111,7 @@ int
 main( int argc, char *argv[ ] )
 {
 #ifdef _OPENMP
-	//fprintf( stderr, "OpenMP is supported -- version = %d\n", _OPENMP );
+	fprintf( stderr, "OpenMP is supported -- version = %d\n", _OPENMP );
 #else
         fprintf( stderr, "No OpenMP support!\n" );
         return 1;
@@ -180,14 +180,14 @@ main( int argc, char *argv[ ] )
 			float holecy = holecys[n];
 			float holecr = holecrs[n];
 
-			float da = Length( ????? );
-			if( ????? )
+			float da = Length( PinAx-holeax, PinAy-holeay );
+			if( (da+PinAr) <= holear )
 			{
-				float db = Length( ????? );
-				if( ????? )
+				float db = Length( PinBx-holebx, PinBy-holeby );
+				if( (db+PinBr) <= holebr )
 				{
-					float dc = Length( ????? );
-					if( ????? )
+					float dc = Length( PinCx-holecx, PinCy-holecy );
+					if( (dc+PinCr) <= holecr )
                                 		numSuccesses++;
 				}
 			}
