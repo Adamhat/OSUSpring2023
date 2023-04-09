@@ -1,0 +1,2 @@
+g++ proj01.cpp -o proj01 -lm -fopenmp
+./proj01
