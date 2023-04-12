@@ -1,2 +1,11 @@
+Basic Compile Commands
 g++ proj01.cpp -o proj01 -lm -fopenmp
 ./proj01
+
+Makefile
+
+chmod +x proj01.sh
+./proj01.sh
+
+CSV 
+./proj01.sh >& proj01.csv

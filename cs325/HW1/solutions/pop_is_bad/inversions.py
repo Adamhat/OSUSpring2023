@@ -1,0 +1,40 @@
+#!/usr/bin/env python3
+
+__author__ = "Liang Huang" # O(n^2) time or worse!
+
+def mergesort(lst):
+    l = len(lst)
+    if l <= 1:
+        return lst, 0
+    return mergesorted(mergesort(lst[:l//2]), mergesort(lst[l//2:]))
+
+def mergesorted(left, right): # O(n^2)-time!
+    (a, numa), (b, numb) = left, right
+    if a == [] or b == []:
+        return a+b, numa+numb
+    c, numc = [], numa+numb
+    while a != [] and b != []: # both non-empty
+        if a[0] > b[0]:
+            c.append(b.pop(0)) # O(n)-time!
+            numc += len(a)
+        else:
+            c.append(a.pop(0)) # O(n)-time!
+    # at least one of them is empty
+    c += a + b
+    return c, numc
+
+num_inversions = lambda a: mergesort(a)[1]
+
+if __name__ == "__main__":
+    import sys, time
+    import random
+    random.seed(0)
+    sys.setrecursionlimit(100000)
+    n = 1000
+    while n <= 128000:
+        a = random.sample(list(range(n)), n) # random permutation
+        t = time.time()
+        b = mergesort(a)
+        print(sorted(a) == b)
+        print(n, time.time() - t)
+        n *= 2

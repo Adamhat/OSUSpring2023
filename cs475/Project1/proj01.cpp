@@ -23,7 +23,7 @@
 // how many tries to discover the maximum performance:
 #define NUMTIMES	20
 
-//#define CSV
+#define CSV
 
 // the pins; numbers are constants:
 const float PinAx =	3.0f;
@@ -111,7 +111,7 @@ int
 main( int argc, char *argv[ ] )
 {
 #ifdef _OPENMP
-	fprintf( stderr, "OpenMP is supported -- version = %d\n", _OPENMP );
+	//fprintf( stderr, "OpenMP is supported -- version = %d\n", _OPENMP );
 #else
         fprintf( stderr, "No OpenMP support!\n" );
         return 1;
@@ -204,7 +204,7 @@ main( int argc, char *argv[ ] )
         float probability = (float)numSuccesses/(float)( NUMTRIALS );        // just get for last NUMTIMES run
 
 #ifdef CSV
-        fprintf(stderr, ????? );
+        fprintf(stderr, "%d, %d, %.2f, %.2lf \n", NUMT, NUMTRIALS, 100.*probability, maxPerformance);
 #else
         fprintf(stderr, "%2d threads : %8d trials ; probability = %6.2f ; megatrials/sec = %6.2lf\n",
                 NUMT, NUMTRIALS, 100.*probability, maxPerformance);
