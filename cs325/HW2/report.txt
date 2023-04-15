@@ -1,0 +1,18 @@
+1. Approximately how many hours did you spend on this assignment?
+About 2 hours
+
+2. Would you rate it as easy, moderate, or difficult?
+Moderate with videos, Difficult before videos.
+
+3. Did you work on it mostly alone, or mostly with other people?
+   Note you are encouraged to discuss with your classmates, 
+   but each students should submit his/her own code.
+
+Alone
+
+
+4. How deeply do you feel you understand the material it covers (0%-100%)? 
+90%
+
+5. Any other comments?
+N/A

@@ -7,10 +7,29 @@ def sort(a):
         right = [x for x in a[1:] if x >= pivot]
         return [sort(left)] + [pivot] + [sort(right)]
     
+def height(tree):
+    if tree == []:
+        return 0
+    else:
+        leftHeight = height(tree[0])
+        rightHeight = height(tree[2])
+        return max(leftHeight, rightHeight) + 1
+    
 def longest(tree):
-    return 0
+    if tree == []:
+        return 0
+    else:
+        leftHeight = height(tree[0])
+        rightHeight = height(tree[2])
+        return max(leftHeight + rightHeight, max(longest(tree[0]), longest(tree[2])))
+    
 
-if __name__ == "__main__":
-    tree = sort([3, 1, 2])
-    print(tree)
-    longest(tree)
+#if __name__ == "__main__":
+#    tree = [[], 1, []]
+#    print(longest(tree))
+#    
+#    tree = [[[], 1, []], 2, [[], 3, []]]
+#    print(longest(tree))
+#    
+#    tree = [[[[], 1, []], 2, [[], 3, []]], 4, [[[], 5, []], 6, [[], 7, [[], 9, []]]]]
+#    print(longest(tree))

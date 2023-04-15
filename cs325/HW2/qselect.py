@@ -13,5 +13,5 @@ def qselect(lowestValue, arr):
         else:
             return qselect(lowestValue - i, right)
 
-if __name__ == '__main__':
-    print(qselect(2, [3, 10, 4, 7, 19]))
+#if __name__ == '__main__':
+#    print(qselect(2, [3, 10, 4, 7, 19]))
