@@ -54,8 +54,8 @@ void getEnvironmentalVariables( float* tempFactor, float* precipFactor )
     NowPrecip = precip + Ranf( &seed,  -RANDOM_PRECIP, RANDOM_PRECIP );
     if( NowPrecip < 0. ) NowPrecip = 0.;
 
-    *tempFactor = exp( -Sqr((NowTemp - MIDTEMP) / 10. ));
-    *precipFactor = exp( -Sqr((NowPrecip - MIDPRECIP) / 10. ));
+    (*tempFactor) = exp( -Sqr((NowTemp - MIDTEMP) / 10. ));
+    (*precipFactor) = exp( -Sqr((NowPrecip - MIDPRECIP) / 10. ));
 }
 
 int
@@ -125,7 +125,7 @@ Watcher( float* tempFactor, float* precipFactor )
         nextHeight -= (float)NowNumRabbits * ONE_RABBITS_EATS_PER_MONTH;
         if( nextHeight < 0. ) nextHeight = 0.;
 
-        getEnvironmentalVariables( &tempFactor, &precipFactor );
+        getEnvironmentalVariables( tempFactor, precipFactor );
 
         // DonePrinting barrier:
         #pragma omp barrier
