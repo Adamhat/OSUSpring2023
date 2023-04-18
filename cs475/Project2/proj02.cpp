@@ -41,6 +41,17 @@ Sqr( float x )
         return x*x;
 }
 
+void
+incrementDate ()
+{
+    NowMonth++;
+        if( NowMonth == 12 )
+        {
+            NowYear++;
+            NowMonth = 0;
+        }
+}
+
 void getEnvironmentalVariables( float* tempFactor, float* precipFactor ) 
 {
     float x = Ranf( &seed, -1.f, 1.f );
@@ -75,13 +86,12 @@ Rabbits( )
             nextNumRabbits--;
         }
 
-        if (nextNumRabbits < 0) 
-        {
-            nextNumRabbits = 0;
-        }
+        if( nextNumRabbits < 0 ) nextNumRabbits = 0;
         
         // DoneComputing barrier:
         #pragma omp barrier
+
+        NowNumRabbits = nextNumRabbits;
 
         // DoneAssigning barrier:
         #pragma omp barrier
@@ -92,13 +102,21 @@ Rabbits( )
 }
 
 int
-RyeGrass( )
+RyeGrass( float* tempFactor, float* precipFactor )
 {
     while( NowYear < 2029 )
     {
+        float nextHeight = NowHeight;
+
+        nextHeight += (*tempFactor) * (*precipFactor) * RYEGRASS_GROWS_PER_MONTH;
+        nextHeight -= (float)NowNumRabbits * ONE_RABBITS_EATS_PER_MONTH;
+
+        if( nextHeight < 0. ) nextHeight = 0.;
 
         // DoneComputing barrier:
         #pragma omp barrier
+
+        NowHeight = nextHeight;
 
         // DoneAssigning barrier:
         #pragma omp barrier
@@ -120,10 +138,10 @@ Watcher( float* tempFactor, float* precipFactor )
         // DoneAssigning barrier:
         #pragma omp barrier
 
-        float nextHeight = NowHeight;
-        nextHeight += (*tempFactor) * (*precipFactor) * RYEGRASS_GROWS_PER_MONTH;
-        nextHeight -= (float)NowNumRabbits * ONE_RABBITS_EATS_PER_MONTH;
-        if( nextHeight < 0. ) nextHeight = 0.;
+        fprintf(stderr, "YEAR: %d, MONTH: %d, Temp: %.2f, Precip: %.2f, GHeight: %.2f, Rabbit#: %d \n", 
+                NowYear, NowMonth, NowTemp, NowPrecip, NowHeight, NowNumRabbits);
+
+        incrementDate();
 
         getEnvironmentalVariables( tempFactor, precipFactor );
 
@@ -174,7 +192,7 @@ int main( )
 
         #pragma omp section
         {
-            RyeGrass();
+            RyeGrass( &tempFactor, &precipFactor );
         }
 
         #pragma omp section
