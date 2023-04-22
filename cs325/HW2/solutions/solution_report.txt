@@ -1,0 +1,31 @@
+CS 325, Algorithms, Spring 2023
+HW2 - qselect, longest path
+Reference Solutions
+
+1. quickselect complexity analysis:
+
+   best-case: T(n) = T(n/2) + O(n)
+   	      	   = n + n/2 +n/4 + ...
+		   = n (1 + 1/2 + 1/4 + ...)
+		   = 2n = O(n)
+   worst-case: exactly the same as quicksort worst-case
+   	       T(n) = T(n-1) + O(n)
+	       	    = O(n^2)
+   avg-case (with randomized pivot, "expected linear time") is the same as best-case 
+   (detailed analysis is beyond this course, but you can refer to textbooks).
+   
+2. longest complexity analysis:
+   
+   recursion with a byproduct: O(1) per node, so O(n)
+   
+   A LOT of students, however, wrote two recursive functions, max_length and depth (or height).
+   This is incorrect, because the amount of work is no longer O(1) per node, but O(h) for a node of height h.
+   Then:
+   worst-case (if the tree is a single chain): O(n^2)!
+   (1 + 2 + ... + (n-1) + n = O(n^2))
+
+   In fact, I made stronger test cases stronger, and this solution will get Time Limit Exceeded (you can try submit again).
+
+   best-case (if the tree is fully balanced): O(n) -- similar to heapify (see HW4)
+   (logn + (logn-1) * 2 + ... + 1 * n/2 = O(n))
+   

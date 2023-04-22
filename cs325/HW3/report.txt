@@ -1,0 +1,54 @@
+Pre 1. What if the input array is *not* sorted? How much slower would it be?
+   Hint: use quickselect.
+
+O(nlogn + k)
+
+Pre 2. Summarize the time complexities of the basic operations (push, pop-min, peek, heapify) for these implementations of priority queue:
+   
+   (a) unsorted array
+   O(n) all
+   (b) sorted array (highest priority first; e.g., in the ER, "most urgent patient first")
+   O(1) all but heapify O(n)
+   (c) reversely sorted array (lowest priority first)
+   Same as b but push is O(1)
+   (d) linked list
+   All O(n) but push is O(1)
+   (e) binary heap
+   First two are logn, O(1), O(n)
+
+0. What's your name?
+Adam Farhat
+
+
+1. Approximately how many hours did you spend on this assignment?
+3 Hr
+
+
+2. Would you rate it as easy, moderate, or difficult?
+moderate
+
+
+3. Did you work on it mostly alone, or mostly with other people?
+   Note you are encouraged to discuss with your classmates, 
+   but each students should submit his/her own code.
+Alone
+
+
+4. How deeply do you feel you understand the material it covers (0%-100%)? 
+75%
+
+
+5. Which part(s) of the course you like the most so far?
+I like learning about new algorithems, its very interesting.
+
+
+6. Which part(s) of the course you dislike the most so far?
+I kindof dislike how our implementations seem to be almost worthless for exams as we are required to understand the solutions implementation almost verbatim.
+
+
+7. Take a moment to reflect on your Quiz 1 performance and
+   make sure you understand all the problems that you got wrong.
+   Include any plans to improve your performance in the coming Quiz 2 and Midterm.
+
+I only missed the second half of the first question because I missread the question. I made my own case up instead of using the array that was given.
+

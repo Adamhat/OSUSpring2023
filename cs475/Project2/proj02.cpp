@@ -12,6 +12,7 @@ float	     NowPrecip;		                        // inches of rain per month
 float	     NowTemp;		                        // temperature this month
 float	     NowHeight =                    5;		// rye grass height in inches
 int	         NowNumRabbits =                1;		// number of rabbits in the current population
+int          newRabbits=                    0;      // new rabbits immigrating
 
 const float RYEGRASS_GROWS_PER_MONTH =		20.0;
 const float ONE_RABBITS_EATS_PER_MONTH =	1.0;
@@ -74,7 +75,7 @@ Rabbits( )
 {
     while( NowYear < 2029 )
     {
-        int nextNumRabbits = NowNumRabbits;
+        int nextNumRabbits = NowNumRabbits + newRabbits;
         int carryingCapacity = (int)( NowHeight );
 
         if (nextNumRabbits < carryingCapacity) 
@@ -138,8 +139,14 @@ Watcher( float* tempFactor, float* precipFactor )
         // DoneAssigning barrier:
         #pragma omp barrier
 
-        fprintf(stderr, "YEAR: %d, MONTH: %d, Temp: %.2f, Precip: %.2f, GHeight: %.2f, Rabbit#: %d \n", 
-                NowYear, NowMonth, NowTemp, NowPrecip, NowHeight, NowNumRabbits);
+        float NowTempC = ( 5./9. ) * ( NowTemp - 32 );
+        float NowHeightCM = NowHeight * 2.54;
+        float NowPrecipCM = NowPrecip * 2.54;
+
+        //fprintf(stderr, "YEAR: %d, MONTH: %d, Temp: %.2f, Precip: %.2f, GHeight: %.2f, Rabbit#: %d \n", 
+        //        NowYear, NowMonth, NowTempC, NowPrecipCM, NowHeightCM, NowNumRabbits);
+
+        fprintf(stderr, "%d,%d,%.2f,%.2f,%.2f,%d, %d\n", NowYear, NowMonth, NowTempC, NowPrecipCM, NowHeightCM, NowNumRabbits, newRabbits);
 
         incrementDate();
 
@@ -156,12 +163,21 @@ MyAgent( )
     while( NowYear < 2029 )
     {
 
+        int immigration = Ranf(&seed, 0.f, 20.f);
+
+        if ( immigration == 0)
+        {
+            newRabbits = Ranf(&seed, 1.f, 20.f);
+        } else {
+            newRabbits = 0;
+        }
+
         // DoneComputing barrier:
         #pragma omp barrier
 
         // DoneAssigning barrier:
         #pragma omp barrier
-
+        
         // DonePrinting barrier:
         #pragma omp barrier
     }
