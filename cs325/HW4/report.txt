@@ -1,0 +1,39 @@
+There are two methods for building a heap from an unsorted array:
+(1) insert each element into the heap  --- O(nlogn) -- heapq.heappush()
+(2) heapify (top-down)                 --- O(n)     -- heapq.heapify()
+
+Derive these time complexities.
+O(nlogn) and O(n)
+
+Q: What are the time complexities of these algorithms? 
+O(n^2 logn^2) , O(n^2) , O(nlogn)
+
+Q: What's the time complexity? Are you sure it's the optimal?
+    Hint: you can improve it a little bit, since most states don't have any one on Team USA!
+    No need to implement this improvement though.
+
+O(nlogn)
+
+
+0. What's your name?
+Adam Farhat
+
+1. Approximately how many hours did you spend on this assignment?
+2 hours
+
+2. Would you rate it as easy, moderate, or difficult?
+Moderate
+
+3. Did you work on it mostly alone, or mostly with other people?
+   Note you are encouraged to discuss with your classmates, 
+   but each students should submit his/her own code.
+Alone
+
+4. How deeply do you feel you understand the material it covers (0%-100%)? 
+75%
+
+5. Which part(s) of the course you like the most so far?
+I like the leetcode questions
+
+6. Which part(s) of the course you dislike the most so far?
+quizzes and midterms are a bit difficult

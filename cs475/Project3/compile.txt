@@ -1,0 +1,7 @@
+g++ mutex03.cpp  -o mutex03  -lm -fopenmp
+./mutex03
+
+Makefile
+
+chmod +x mutex03.sh
+./mutex03.sh

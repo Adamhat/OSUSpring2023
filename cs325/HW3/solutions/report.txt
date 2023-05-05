@@ -1,0 +1,69 @@
+HW3 Solutions
+
+1. k-closest, sorted:
+
+   binary search + two-pointers: O(logn + k)
+
+   k-closest, unsorted:
+
+   naive: sort, and then call the above (k-closest, sorted): O(nlogn)
+   better: use quickselect:
+
+   (a) create the difference array: d[i] = |a[i] - x|
+   (b) perform quickselect to get the kth smallest element in d; denote it as d[j]
+   (c) perform another scan over d, and output every a[i] whose d[i] <= d[j]
+
+   Time: each step costs O(n), so O(n) total.
+   Caveat: need to be very careful about tie-breaking cases. See kclosest_unsorted.py.
+
+2. xyz: see my code.
+
+3. k-way mergesort:
+
+   This is a classical example that combines divide-n-conquer, mergesort, priority queus, and complexity analysis, which is why it is a favorite in coding interviews.
+
+   First level: merging k sorted lists, with total length of all k lists being n. 
+   Time: O(k + nlogk) = O(nlogk) (since k << n < nlogk).
+   Note the O(k) here is for heapify of the k "leaders", and O(nlogk) is for n iterations of heappop+heappush (or better: heapreplace).
+
+   Recurrence: T(n) = k T(n/k) + O(nlogk).
+
+   Second level: k subtasks, each one has O(n/k log k) => total: O(nlogk)
+   Third level: k^2 subtasks, each one has O(n/(k^2) logk) => total: O(nlogk).
+   ...
+   Every level is the same O(nlogk).
+
+   How many levels? h = log_k n (using logarithm with base k instead of 2).
+
+   Total time: O(nlogk * log_k n) = O(nlogk * log n / logk) = O(nlogn)
+   (note: by the change of base formula, log_k n = log n / log k)
+
+   Side note: this analysis even works with the extreme case of k = n.
+   In this case, k-way mergesort is equal to heapsort (heapify first, and the keep popping the min).
+
+   Implementation note: heapq.merge() is exactly what we wanted: merging several sorted lists, but you can also implement yourself (see my code).
+
+4. Most of this was covered in last week's lecture. It won't show up in Quiz 2, but might in the Midterm.
+
+|--------------+-----------------+------------------+--------------------+-----------------------+----------------------------|
+|              | (a) binary heap | (b) sorted array | (c) unsorted array | (d) sorted linkedlist | (e) reversely sorted array |
+|--------------+-----------------+------------------+--------------------+-----------------------+----------------------------|
+| (1) push     | O(logn)         | O(n)             | amortized O(1)     | O(n)                  | O(n)                       |
+|--------------+-----------------+------------------+--------------------+-----------------------+----------------------------|
+| (2) pop-min  | O(logn)         | O(n)             | O(n)               | O(1)                  | amortized O(1)             |
+|--------------+-----------------+------------------+--------------------+-----------------------+----------------------------|
+| (3) peek-min | O(1)            | O(1)             | O(n) **            | O(1)                  | O(1)                       |
+|--------------+-----------------+------------------+--------------------+-----------------------+----------------------------|
+| (4) make-PQ* | O(n) (heapify)  | O(nlogn) ***     | O(n)               | O(nlogn) ***          | O(nlogn) ***               |
+|--------------+-----------------+------------------+--------------------+-----------------------+----------------------------|
+
+Note: (b) the first element has the highest priority; (e) the first element has the lowest priority.
+  * "heapify" should be replaced by an implementation-neutral name: make-priority-queue (make-PQ).
+ ** if you further keep track of the min position, then peek-min would be O(1). 
+    remember to update that min position in push (still O(1)) and pop-min (still O(n)).
+*** the input list is unsorted, so you need to sort it to make a priority queue.
+
+
+See also:
+https://www.cs.cmu.edu/~adamchik/15-121/lectures/Binary%20Heaps/heaps.html
+http://cs.lmu.edu/~ray/notes/pqueues/
