@@ -1,0 +1,6 @@
+g++ all04.cpp -o all04  -lm -fopenmp
+./all04
+
+
+chmod +x all04.sh
+./all04.sh
