@@ -1,0 +1,75 @@
+1. Unbounded Knapsack
+    (a) Greedy Solution:
+        1) For a bag with weight w and n items, choose the item (w_i, v_i) which has the maximum
+        unit value (v_i/w_i) and the weight w_i should be not more than the bag's weight.
+        2) If all the items' weights are bigger than the bag, stop the algorithm. Otherwise,
+        w = w - w_i, repeat the step 1) and 2).
+
+    (b) Counter example: (6, [(2, 7), (5, 20)])
+        The unit value are (3.5, 4). The greedy algorithm chooses (5, 20) first.
+        Then the bag's remaining weight is 1 and no items can be put into the bag.
+        So the result is (20, [0, 1]).
+        However, the correct answer is (21, [3, 0]).
+
+    (c) Define subproblem:
+        OPT(w) = the maximum value for weight limit w.
+        Goal: OPT(W)
+
+    (d) Recurrence relations:
+        OPT(w) = max{OPT(w - w_i) + v_i}, i=1,...,n and w_i <= w
+
+    (e) Base cases:
+        OPT(w) = 0, w < min(w1,...,wn)
+
+        It's actually easier just to set the default value for any OPT[w] or OPT[w][i] to be zero using defaultdict.
+        >>> from collections import defaultdict
+        >>> opt = defaultdict(int)
+        >>> opt[0]
+        0
+
+    (f) Complexity:
+        Space complexity: O(W)
+        Pf: There are O(W) table entries in OPT.
+
+        Time complexity: O(nW)
+        Pf: There are O(W) table entries, and each table entry takes O(n) time.
+
+2. Bounded Knapsack
+    (a) Greedy solution:
+        1) For A Bag of w and n items, choose the item (w_i, v_i, c_i) which has the maximum unit value
+        (v_i/w_i) and the weight w_i should be not more than the bag's weight and c_i is bigger than zero.
+        2) If all the items' weight are bigger than the bag or all the items have been used, stop the algorithm.
+        Otherwise, w = w - w_i, c_i = c_i - 1. repeat the step 1) and 2).
+
+    (b) Counter example: (12, [(4, 11, 3), (10, 30, 1)])
+        The unit value are (2.75, 3). The greedy algorithm chooses (10, 30, 1)
+        Then the bag's remaining weight is 2 and no items can be put into the bag.
+        So the result is (30, [0, 1]).
+        However, the correct answer is (33, [3, 0]).
+
+    (c) Define subproblem:
+        OPT(w, i) = the maximum value for a subset of items 1,...,i with weight limit w.
+        Goal: OPT(W, n)
+
+    (d) Recurrence relations:
+        OPT(w, i) = max{OPT(w - j * w_i, i-1) + j * v_i}, j = 0,...,c_i and j * w_i <= w
+
+    (e) Base cases:
+        OPT(w, 0) = 0
+        OPT(w, i) = 0, w < min(w_1,...,w_n)
+
+        It’s actually easier just to set the default value for any OPT[w] or OPT[w][i] to be zero using defaultdict.
+        >>> from collections import defaultdict
+        >>> opt = defaultdict(int)
+        >>> opt[0, 0]
+        0
+
+    (f) Complexity:
+        Space complexity: O(nW)
+        Pf: There are O(nW) table entries in OPT.
+
+        Time complexity: O(mW), m = sum(c_1,...,c_i)
+        There are O(nW) table entries.
+        For different i, their count c_i varies and maxc = max(c_1,...,c_i) is the maximum copies among all the items.
+        So the upper bound for the running time of each entry is maxc. A coarse time complexity is O(nW(maxc)).
+        We can get a tight time complexity by summing all the c_i: T(n) = O(W(c_1 + ... + c_n)) = O(mW), m = sum(c_1,...,c_i).

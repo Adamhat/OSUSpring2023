@@ -1,0 +1,39 @@
+0. For each of the coding problems below:
+   (a) Describe a greedy solution.
+    Choose the highest value ratio items only, once bag is full move on to next highest value. Repeat untill no more room.
+
+   (b) Show a counterexample to the greedy solution.
+    You could instead iterate through a tree where you try multiple soltuions and return the best one.
+
+   (c) Define the DP subproblem 
+    Let dp[i][j] represent the maximum value we can achieve using the first i items and with a total weight of exactly j.
+
+
+   (d) Write the recurrence relations
+    dp[i][j] = max(dp[i-1][j], dp[i][j-w[i]] + v[i]) if j >= w[i] else dp[i-1][j]
+
+   (e) Do not forget base cases
+    dp[i][0] = 0 for all 0 <= i <= n
+    dp[0][j] = 0 for all 0 <= j <= W
+
+   (f) Analyze the space and time complexities
+    O(W * n)
+
+
+0. What's your name?
+Adam Farhat
+
+1. Approximately how many hours did you spend on this assignment?
+8 hr
+
+2. Would you rate it as easy, moderate, or difficult?
+moderate
+
+3. Did you work on it mostly alone, or mostly with other people?
+alone
+
+4. How deeply do you feel you understand the material it covers (0%-100%)? 
+60%
+
+5. For the graded question, approximately how many attempts did you make before passing all testcases?
+One but I built test cases on the code before submission.
