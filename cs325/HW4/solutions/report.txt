@@ -1,0 +1,61 @@
+Q0 (heapify vs. heappush).
+
+Here we give a simple derivation without calculus:
+
+useful fact 1: the max number of elements in height h is n/2^{h+1}
+useful fact 2:  1/2 + 2/4 + 3/8 + 4/16 + ... 
+             = (1/2 + 1/4 + 1/8 + 1/16 + ...)
+	     + ( 0  + 1/4 + 1/8 + 1/16 + ...)
+	     + ( 0  +  0  + 1/8 + 1/16 + ...)
+	     + ( 0  +  0  +  0  + 1/16 + ...)
+	     + ...	     
+             = 1 + 1/2 + 1/4 + 1/8 + ... = 2.
+
+(1) insert (heappush) one-by-one:
+each heappush has a bubble-up operation
+so the number of bubble-up operations is:
+
+  sum O(logn - h) n/(2^{h+1}) 
+= O(nlogn) \times sum 1/2^h - O(n) sum h/2^h    
+= O(nlogn) - O(n) = O(nlogn)  
+
+(2) compare with top-down heapify:
+we only have sum O(h) n/(2^{h+1}) = O(n) sum h/2^h = O(n x 2) = O(n)
+
+h is from 0 to logn in both analyses.
+
+more detailed of analysis is on page 135 (chapter 6.3) of CLRS (2nd edition).
+(and KT slides referred to in HW4, but *not* in KT book).
+
+high-level intuitions: 
+top-down heapify is faster because the majority (lowest levels) requires very little work (bubble-down to the leaves), 
+while heappush one-by-one is slower because the majority requires the most work (bubble-up all the way to the root).
+
+yet another solution: you can also write the recurrence relation for heapify:
+T(n) = 2 T(n/2) + O(logn)
+
+and use the Master method (see CLRS 4.5) to get T(n) = O(n).
+
+Q1 (nbest).
+    (a) O(n^2 + n^2 log n^2 + n) = O(n^2 logn)
+    (b) O(n^2 + n^2) = O(n^2)
+    (c) O(2nlogn + nlogn + 2nlogn) = O(nlogn) (sort a and b, n pops, 2n pushes; heapsize bounded by n)
+
+    see slides:
+    https://classes.engr.oregonstate.edu/eecs/spring2023/cs325-001/nbest.pdf
+    
+Q2 (datastream).
+    O(k + nlogk) = O(nlogk) because k << n.
+    First, build a max-heap for the first k numbers. => O(k).
+    For each of the remaining number,
+    	check if it is worse than the top of the heap.
+        if so, do a heapreplace. => O(logk)	
+
+Q3 (team). -- similar to k-way mergesort
+    O(k + nlogk).
+    Could be improved to O(k + nlogn) when n << k by quickselect.
+    rational: if a state's champion doesn't make to the top n, then the whole state should be pruned.
+    
+Midterm will include a BIG problem that combines Q1 and Q3.
+Make sure you read and understand the reference code for Q1 and Q3.
+This problem will be used in HW10, and will reappear in another form in the Final.
