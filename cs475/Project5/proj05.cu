@@ -29,7 +29,7 @@
 #define NUMBLOCKS	( NUMTRIALS / BLOCKSIZE )
 
 
-//#define CSV
+#define CSV
 
 // the pins; numbers are constants:
 #define PinAx	3.0f
@@ -172,17 +172,19 @@ MonteCarlo(
 		dsuccesses[gid] = 0;
 
 		// randomize everything:
-		float holeax = holeaxs[gid];
-		float holeay = holeays[gid];
-		float holear = holears[gid];
+        float holeax = dholeaxs[gid];
+        float holeay = dholeays[gid];
+        float holear = dholears[gid];
 
-		float holebx = holebxs[gid];
-		float holeby = holebys[gid];
-		float holebr = holebrs[gid];
+        float holebx = dholebxs[gid];
+        float holeby = dholebys[gid];
+        float holebr = dholebrs[gid];
 
-		float holecx = holecxs[gid];
-		float holecy = holecys[gid];
-		float holecr = holecrs[gid];
+        float holecx = dholecxs[gid];
+        float holecy = dholecys[gid];
+        float holecr = dholecrs[gid];
+
+		float da = Length( PinAx-holeax, PinAy-holeay );
 		if( (da+PinAr) <= holear )
 		{
 			float db = Length( PinBx-holebx, PinBy-holeby );
