@@ -1,0 +1,85 @@
+For the following graphs, decide whether they are
+   (1) directed or undirected, (2) dense or sparse, and (3) cyclic or acyclic:
+
+   (a) Facebook
+   1. directed
+   2. dense
+   3. cyclic
+
+   (b) Twitter
+   1. directed
+   2. sparse
+   3. cyclic
+
+   (c) a family
+   1. undirected
+   2. sparse
+   3. acyclic
+
+   (d) V=airports, E=direct_flights
+   1. directed
+   2. sparse
+   3. cyclic
+
+   (e) a mesh
+   1. undirected
+   2. dense
+   3. cyclic
+
+   (f) V=courses, E=prerequisites
+   1. directed
+   2. sparse
+   3. acyclic
+
+   (g) a tree
+   1. undirected
+   2. sparse
+   3. acyclic
+
+   (h) V=linux_software_packages, E=dependencies
+   1. directed
+   2. sparse
+   3. acyclic?
+
+   (i) DP subproblems for 0-1 knapsack
+   1. directed
+   2. sparse
+   3. acyclic
+
+   Can you name a very big dense graph?
+
+   Optical fiber network for internet connection
+
+
+questions: 
+   (a) did you realize that bottom-up implementations of DP use (implicit) topological orderings?
+       e.g., what is the topological ordering in your (or my) bottom-up bounded knapsack code?
+       
+      I did not realize it untill I watched a video explaining the algo using a map. Watching it being broken down made it extremely 
+      clear that it used (implicit) topological orderings. For the bounded knapsack, first you start with item one, preform operations 
+      then move to the next item and etc.
+
+   (b) what about top-down implementations? what order do they use to traverse the graph?
+
+      Top down would likely begin at a node with no edges then move into each neighbor.
+
+   (c) does that suggest there is a top-down solution for topological sort as well? 
+
+      A believe it does.
+
+
+0. What's your name?
+Adam Farhat
+1. Approximately how many hours did you spend on this assignment?
+6+ hours
+2. Would you rate it as easy, moderate, or difficult?
+difficult
+3. Did you work on it mostly alone, or mostly with other people?
+alone
+4. How deeply do you feel you understand the material it covers (0%-100%)?
+~60%
+5. Take a moment to reflect on your midterm performance; separate the data structures and DP parts.
+   Now, do you understand all the problems you didn't solve correctly?
+Did as well as I hoped with the timeframe I had
+6. Any other comments?
+N/A
