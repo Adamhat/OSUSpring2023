@@ -1,0 +1,47 @@
+Q: What if you only have heapq, can you still make Dijkstra work (with the built-in heapq)? 
+    Can you re-analyze the time/space complexities?
+
+    I am fairly sure that heapq can be used to create the dijkstras algorithm. The time complexity would likely be higher
+    since there could be repotition in the heap. I believe it is nlogn.
+
+Q: Is Dijkstra a greedy algorithm or dynamic programming algorithm?
+    Most textbooks (such as KT and CLRS) classify it as a greedy algorithm,
+    but some people have different opinions, e.g.:
+
+    (a) https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm#Dynamic_programming_perspective
+    (b) Dijkstra's algorithm revisited: the dynamic programming connexion, by M. Sniedovich (2006):
+    http://matwbn.icm.edu.pl/ksiazki/cc/cc35/cc3536.pdf
+    (c) https://www.quora.com/Is-Dijkstras-Algorithm-a-greedy-algorithm-or-a-dynamic-programming-algorithm
+    (d) https://aclanthology.org/C08-5001.pdf
+    
+    What do you think?
+
+    I think that Dijkstras aglorithm is a fairly greedy algorithm as it is making the most optimal choice every step of the algorithm.
+    Unlike other DP problems we have seen in this class, Dijkstras does not have subproblems that can be solved in tandem as each option 
+    will likely be considered one time.
+
+Q: for problems that can be solved by both Dijkstra and Viterbi, which one is faster? 
+
+I believe that dijkstras algorithm is faster then Viterbi but it could depend on the use case.
+
+
+0. What's your name?
+Adam Farhat
+
+1. Approximately how many hours did you spend on this assignment?
+1-2 hours 
+
+2. Would you rate it as easy, moderate, or difficult?
+easy
+
+3. Did you work on it mostly alone, or mostly with other people?
+alone 
+
+4. How deeply do you feel you understand the material it covers (0%-100%)?
+90%
+
+5. If you've passed all testcases, how many attempts did you use?
+Three
+
+6. Any other comments?
+N/A
