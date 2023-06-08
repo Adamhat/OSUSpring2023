@@ -2,7 +2,7 @@
 
 start=1
 
-end=10
+end=8
 
 for i in $(seq $start $end)
 do
