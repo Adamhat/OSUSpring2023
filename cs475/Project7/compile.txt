@@ -1,0 +1,5 @@
+mpic++ fourier.cpp -o fourier  -lm
+mpiexec -np 4 fourier
+
+chmod +x proj07.sh
+./proj07.sh
