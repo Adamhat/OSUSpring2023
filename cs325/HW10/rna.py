@@ -1,38 +1,35 @@
-import heapq
-
-pairs = set(['AU', 'UA', 'GC', 'CG', 'GU', 'UG'])
-
-def rna_seq(seq):
+def populate_dp_and_counts(seq, valid_pairs, dp, counts):
     n = len(seq)
-    rna = [[0] * n for _ in range(n)]
-    backtrack = [[None] * n for _ in range(n)]
+    for gap in range(2, n+1):
+        for i in range(n-gap+1):
+            j = i+gap-1
+            if seq[i] + seq[j] in valid_pairs:
+                counts[i][j] = counts[i+1][j-1] + 1
+            for k in range(i, j):
+                counts[i][j] = max(counts[i][j], counts[i][k] + counts[k+1][j])
 
-    for length in range(1, n):
-        for i in range(n - length):
-            j = i + length
-            if seq[i] + seq[j] in pairs and rna[i + 1][j - 1] + 1 > rna[i][j]:
-                rna[i][j] = rna[i + 1][j - 1] + 1
-                backtrack[i][j] = (i + 1, j - 1)
-            for k in range(i + 1, j):
-                if rna[i][k] + rna[k + 1][j] > rna[i][j]:
-                    rna[i][j] = rna[i][k] + rna[k + 1][j]
-                    backtrack[i][j] = (i, k, k + 1, j)
-
-    return rna, backtrack
-
-def reconstruct(seq, backtrack, i, j):
+def get_structure(seq, valid_pairs, dp, counts, i, j):
     if i >= j:
         return '.' * (j - i + 1)
-    elif backtrack[i][j] is not None and len(backtrack[i][j]) == 2:
-        x, y = backtrack[i][j]
-        return '(' + reconstruct(seq, backtrack, x, y) + ')'
-    elif backtrack[i][j] is not None and len(backtrack[i][j]) == 4:
-        a, b, c, d = backtrack[i][j]
-        return reconstruct(seq, backtrack, a, b) + reconstruct(seq, backtrack, c, d)
+    if dp[i][j]:
+        return dp[i][j]
+    max_count = counts[i][j]
+    if seq[i] + seq[j] in valid_pairs and counts[i+1][j-1] + 1 == max_count:
+        dp[i][j] = '(' + get_structure(seq, valid_pairs, dp, counts, i+1, j-1) + ')'
     else:
-        return '.' * (j - i + 1)
+        for k in range(i, j):
+            if counts[i][k] + counts[k+1][j] == max_count:
+                dp[i][j] = get_structure(seq, valid_pairs, dp, counts, i, k) + get_structure(seq, valid_pairs, dp, counts, k+1, j)
+                break
+    return dp[i][j]
 
 def best(seq):
-    rna, backtrack = rna_seq(seq)
-    i, j = 0, len(seq) - 1
-    return rna[i][j], reconstruct(seq, backtrack, i, j)
+    valid_pairs = {'AU', 'UA', 'CG', 'GC', 'GU', 'UG'}
+    n = len(seq)
+    dp = [['']*n for _ in range(n)]
+    counts = [[0]*n for _ in range(n)]
+
+    populate_dp_and_counts(seq, valid_pairs, dp, counts)
+    
+    return counts[0][n-1], get_structure(seq, valid_pairs, dp, counts, 0, n-1)
+
