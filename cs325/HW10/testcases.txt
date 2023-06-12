@@ -115,4 +115,17 @@ def best(seq):
     return counts[0][n-1], get_structure(seq, valid_pairs, dp, counts, 0, n-1)
 
 
+print(best("ACAGU")) # (2, '((.))')
+print(total("ACAGU")) # 6
 
+print(best("AC")) # (0, '..')
+print(total("AC")) # 1
+
+print(best("GUAC")) # (2, '(())')
+print(total("GUAC")) # 5
+
+print(kbest("ACAGU", 6)) # [(2, '((.))'), (1, '.(.).'), (1, '..(.)'), (1, '...()'), (1, '(...)'), (0, '.....')]
+
+print(kbest("AC", 1)) # [(0, '..')]
+
+print(kbest("GUAC", 5)) # [(2, '(())'), (1, '()..'), (1, '.().'), (1, '(..)'), (0, '....')]
